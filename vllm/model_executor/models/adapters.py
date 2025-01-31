@@ -189,7 +189,7 @@ def as_classification_model(cls: _T) -> _T:
 
             self.score = RowParallelLinear(config.hidden_size,
                                            config.num_labels,
-                                           quant_config=quant_config,
+                                           quant_config=None,
                                            input_is_parallel=False,
                                            bias=False,
                                            prefix=maybe_prefix(
@@ -210,7 +210,6 @@ def as_classification_model(cls: _T) -> _T:
                                             inputs_embeds)
             logits, _ = self.score(hidden_states)
             return logits
-
 
     ModelForClassification.__name__ = \
         _get_pooling_model_name(cls.__name__, "ForClassification")
